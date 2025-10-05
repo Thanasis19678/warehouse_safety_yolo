@@ -26,7 +26,7 @@
 | **FUCTIONS.py** | Περιλαμβάνει τις μαθηματικές εξισώσεις, συναρτήσεις υπολογισμού δεικτών και Kalman φίλτρα. |
 | **Try_models.py** | Επιτρέπει τη γρήγορη δοκιμή YOLO μοντέλων (π.χ. YOLOv8n, YOLOv8m, custom models). |
 | **homography_points.py** | Επιλογή 4 σημείων πατώματος για υπολογισμό ομογραφίας και μετατροπή pixel → μέτρα. |
-| **dataset_Develop.py** | Δημιουργία dataset (pose & detection) από ένα ή πολλαπλά βίντεο. |
+| **Dataset_develop.py** | Δημιουργία dataset (pose & detection) από ένα ή πολλαπλά βίντεο. |
 | **CONVERT_TXT_to_JSON.py** | Μετατροπή δεδομένων pose από `.txt` σε `.json` για χρήση σε Roboflow ή άλλες πλατφόρμες annotation. |
 
 ---
