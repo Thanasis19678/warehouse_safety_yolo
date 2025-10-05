@@ -1,0 +1,17 @@
+# ===== Core scientific stack =====
+numpy>=1.25.0
+pandas>=2.1.0
+matplotlib>=3.8.0
+scipy>=1.11.0
+
+# ===== Computer Vision =====
+opencv-python>=4.9.0
+opencv-contrib-python>=4.9.0
+
+# ===== Deep Learning / Object Detection =====
+torch>=2.2.0
+torchvision>=0.17.0
+ultralytics>=8.2.0
+
+# ===== Utilities =====
+tqdm>=4.66.0
