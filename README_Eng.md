@@ -3,7 +3,7 @@
 ```markdown
 # 🦺 Warehouse Safety Analysis with YOLO and Kalman Filtering
 
-This project was developed as part of a **Master’s Thesis** focused on **automated risk detection between pedestrians and forklifts** in warehouse environments, using **YOLOv8**, **Kalman Filtering**, and **Leading Safety Indicators**.
+This project was developed as part of a **Master’s Thesis**  "Development of Safety Leading Indicators through Computer Vision" focused on **automated risk detection between pedestrians and forklifts** in warehouse environments, using **YOLOv8**, **Kalman Filtering**, and **Leading Safety Indicators**.
 
 ---
 
@@ -62,7 +62,7 @@ cd warehouse_safety_yolo
 pip install -r requirements.txt
 🚀 Run the project
 bash
-Αντιγραφή κώδικα
+
 python Leading_Indicators_Cal.py
 Select a video file to analyze.
 Results are automatically stored under leading_indicators_results/.
@@ -79,24 +79,15 @@ Ultralytics YOLOv8
 Kalman Filter
 
 👨‍💻 Author
-Thanasis [Surname]
-Master’s Thesis — [University / Department Name]
+Thanasis Tsagkouros
+Master’s Thesis — [National Technical University of Athens / Mechanical Engineering]
 📘 GitHub: Thanasis19678
 
-✨ Warehouse Safety Analytics through Computer Vision and Predictive Indicators.
+✨ Development of Safety Leading Indicators through Computer Vision.
 
-yaml
-Αντιγραφή κώδικα
+
+
 
 ---
 
-## 📦 Οδηγία για χρήση
 
-1. Στο repo σου, δημιούργησε δύο νέα αρχεία:
-   - `README_EL.md`
-   - `README_EN.md`
-2. Κάνε copy–paste το αντίστοιχο κείμενο.
-3. (Προαιρετικά) στο κύριο `README.md`, μπορείς να προσθέσεις:
-   ```markdown
-   🇬🇷 [Διάβασε στα Ελληνικά](README_EL.md)  
-   🇬🇧 [Read in English](README_EN.md)
