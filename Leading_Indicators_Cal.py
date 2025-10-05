@@ -147,10 +147,10 @@ while True:
             car_data[tid]["pos_m"]  = (car_data[tid]["pos_m"] + [car_pos_m])[-PRS_POSITION:]
 
             # KF velocities (dt=1/fps)
-            v_px = compute_velocity_with_kalman1(kf_car_px, tid, np.array([cx, cy]), dt0=1/fps,
+            v_px = compute_velocity_with_kalman1(kf_car_px, tid, np.array([cx, cy]), dt=1/fps,
                                                  sigma_meas=5.0 , sigma_accel=6.0)
 
-            v_m  = compute_velocity_with_kalman1(kf_car_m,  tid, car_pos_m,          dt0=1/fps,
+            v_m  = compute_velocity_with_kalman1(kf_car_m,  tid, car_pos_m,          dt=1/fps,
                                                  sigma_meas=0.3, sigma_accel=3.0)
 
             car_data[tid]["vel_px"] = (car_data[tid]["vel_px"] + [v_px])[-PRS_VEL:]
@@ -216,10 +216,10 @@ while True:
             person_data[tid]["pos_m"]  = (person_data[tid]["pos_m"]  + [pos_m])[-PRS_POSITION:]
 
             # KF velocities (dt=1/fps)
-            v_px = compute_velocity_with_kalman1(kf_person_px, tid, np.array([cx, cy]), dt0=1/fps,
+            v_px = compute_velocity_with_kalman1(kf_person_px, tid, np.array([cx, cy]), dt=1/fps,
                                                  sigma_meas=10.0, sigma_accel=10.5)
 
-            v_m  = compute_velocity_with_kalman1(kf_person_m,  tid, pos_m,              dt0=1/fps,
+            v_m  = compute_velocity_with_kalman1(kf_person_m,  tid, pos_m,              dt=1/fps,
                                                  sigma_meas = 0.2, sigma_accel=1.2)
 
             person_data[tid]["vel_px_H"] = (person_data[tid]["vel_px_H"] + [v_px])[-PRS_VEL_H:]

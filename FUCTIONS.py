@@ -30,7 +30,7 @@ def iou_xyxy(a, b):
     return inter/denom if denom>0 else 0.0
 
 
-def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt0,
+def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt,
                                   sigma_meas,  # std της μέτρησης (px ή μέτρα)
                                   sigma_accel,  # std επιτάχυνσης (px/s^2 ή μ/s^2)
                                   nis_maneuver=6.0,  # κατώφλι NIS για "στροφή"
@@ -46,10 +46,9 @@ def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt0,
     Επιστρέφει: np.array([vx, vy], float32)
     """
     meas = np.asarray(measurement, dtype=np.float32).reshape(2, 1)
-    # now = time.time()
 
     entry = tracker_dict.get(object_id)
-    dt0=dt0
+    dt=dt
     if entry is None:
         # --------- INIT: 6x2 Kalman (CA) ----------
         kf = cv2.KalmanFilter(6, 2)  # state: [x,y,vx,vy,ax,ay], meas: [x,y]
@@ -62,10 +61,10 @@ def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt0,
 
         # F(dt)
         # dt0 =1/fps
-        F = np.array([[1,0,dt0,0, 0.5*dt0*dt0, 0],
-                      [0,1,0, dt0,0,        0.5*dt0*dt0],
-                      [0,0,1, 0, dt0,       0],
-                      [0,0,0, 1, 0,        dt0],
+        F = np.array([[1,0,dt,0, 0.5*dt*dt, 0],
+                      [0,1,0, dt,0,        0.5*dt*dt],
+                      [0,0,1, 0, dt,       0],
+                      [0,0,0, 1, 0,        dt],
                       [0,0,0, 0, 1,        0],
                       [0,0,0, 0, 0,        1]], dtype=np.float32)
         kf.transitionMatrix = F
@@ -104,16 +103,13 @@ def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt0,
     # --------- UPDATE EXISTING FILTER ----------
     kf = entry["kf"]
 
-    # dt = now - entry["last_time"]
-    # if dt <= 1e-6:  # αν κολλήσει ο χρόνος
-    #     dt = 1.0 / fps
-    # entry["last_time"] = now
+
 
     # F(dt) update
     F = kf.transitionMatrix
-    F[0, 2] = dt0; F[1, 3] = dt0
-    F[0, 4] = 0.5 * dt0*dt0; F[1, 5] = 0.5 * dt0*dt0
-    F[2, 4] = dt0; F[3, 5] = dt0
+    F[0, 2] = dt; F[1, 3] = dt
+    F[0, 4] = 0.5 * dt*dt; F[1, 5] = 0.5 * dt*dt
+    F[2, 4] = dt; F[3, 5] = dt
     kf.transitionMatrix = F
 
     #  # x_k   ← x + vx·dt
@@ -133,8 +129,8 @@ def compute_velocity_with_kalman1(tracker_dict, object_id, measurement, dt0,
     kf.predict()
 
     # Warm-start ταχύτητας στο 2ο frame
-    if entry["seen"] == 1 and dt0 > 1e-6:
-        dv = (meas - entry["last_meas"]) / dt0   # 2x1
+    if entry["seen"] == 1 and dt > 1e-6:
+        dv = (meas - entry["last_meas"]) / dt   # 2x1
         kf.statePre[2, 0] = float(dv[0, 0])  # vx
         kf.statePre[3, 0] = float(dv[1, 0])  # vy
 
